@@ -1,0 +1,8 @@
+:root{
+	/*pc*/
+	--h1-max: 4rem; /* Corrigido: apenas o valor */
+	--h2-max: 2.8rem; /* Corrigido: apenas o valor */
+	--h3-max: 2.8rem; /* Corrigido: apenas o valor */
+	--p-max: 1.3rem; /* Corrigido: apenas o valor e adicionado rem*/
+	--links-max:1.4rem;
+}

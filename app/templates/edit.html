@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}alunos{% endblock %}
+
+{% block content %}
+<a href="{% url 'list' %}" >Cancelar</a>
+<h1 class="text-center">Editar</h1>
+    <form action="{% url 'edit' aluno.id %}" method="POST">  <!-- Alteração aqui -->
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Use .as_p para exibir como parágrafos (mais fácil) -->
+        <input class="btn btn-success" type="submit" value="Atualizar">
+        <!-- <button>Atualizar</button>   O <input type="submit"> já faz o mesmo -->
+    </form>
+<br>
+{% endblock %}

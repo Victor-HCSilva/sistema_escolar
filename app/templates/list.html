@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Alunos{% endblock %}
+
+{% block content %}
+
+    <h1 class="text-center">Alunos</h1>
+    <strong><p>Quant. total de alunos: </strong> {{ quantidade }} </p>
+
+    {% if alunos %}
+    <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Nome</th>
+      <th>Telefone</th>
+      <th>Ano</th>
+      <th>Turma</th>
+      <th>Editar</th>
+      <th>Excluir</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for aluno in alunos %}
+    <tr>
+      <td>{{ aluno.nome|title }}</td>
+      {% if aluno.telefone != "000000000" %}
+        <td>{{ aluno.telefone }}</td>
+      {% else %}
+        <td>Não cadastrado</td>
+      {% endif %}
+     <td>{{ aluno.ano }}</td>
+      <td>{{ aluno.turma }}</td>
+
+      
+      <td><a class="btn btn-warning" href="{% url 'edit' id_aluno=aluno.id %}">Editar</a></td>
+      <td><a class="btn btn-danger" href="{% url 'delete' id_aluno=aluno.id %}">Excluir</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<h2>Não há cadastros ainda ...</h2>
+  <a class="" href="{% url 'cadastro' %}">Adicione</a>
+{% endif %}
+
+
+
+
+{% endblock %}
+
+

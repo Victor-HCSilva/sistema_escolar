@@ -1,0 +1,97 @@
+@import "./fonts.css";
+
+:root {
+  /* Variáveis base para telas maiores (desktop) */
+  --h1-max: 3rem;
+  --h2-max: 2.3rem;
+  --h3-max: 1.8rem;
+  --p-max: 1.1rem;
+  --links-max: 1.2rem;
+
+  /* Outras variáveis (cores, etc.) */
+  --links: rgb(0, 100, 200);
+  --text-color: black;
+  --nav-links: black;
+  --background-nav: green;
+  --background-color: gray;
+}
+.nav-bar-dark{
+  background-color: green !important;
+  color: white !important;
+}
+
+/* Estilos comuns a todos os tamanhos de tela */
+body {static/images/background.avif
+  color: red;
+}
+
+h1 {
+  font-size: var(--h1-max); /* Removido !important */
+}
+
+h2 {
+  font-size: var(--h2-max); /* Removido !important */
+}
+
+p {
+  font-size: var(--p-max); /* Removido !important */
+}
+
+a {
+  font-size: var(--links-max); /* Removido !important */
+}
+.icon{
+  padding: 2px;
+  border-radius: 100%;
+  border: white 2px solid;
+}
+
+/* Media query para telas menores (mobile) */
+@media (max-width: 740px) {
+  :root {
+    /* Sobrescreve as variáveis para mobile */
+    --h1-max: 10rem;
+    --h2-max: 5rem;
+    --h3-max: 5rem;
+    --p-max: 5rem;
+    --links-max: 5rem;
+  }
+
+  * {
+    text-align: center;
+  }
+
+  /*Manter o important aqui sobrescreve o q tinha antes*/
+  h1 {
+    font-size: var(--h1-max) !important;
+  }
+
+  h2 {
+    font-size: var(--h2-max) !important;
+  }
+
+  p {
+    font-size: var(--p-max) !important;
+  }
+
+  a {
+    font-size: var(--links-max) !important;
+  }
+
+  .teste {
+    color: red !important;
+  }
+}
+
+/* Media query para telas muito grandes (desktop) */
+@media (min-width: 1200px) {
+  #lapis_index {
+    margin: auto;
+    border-radius: 100%;
+    margin-top: 100px;
+  }
+
+  body {
+    background-color: black;
+  }
+}

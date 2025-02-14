@@ -1,0 +1,33 @@
+
+
+{% extends "base.html" %}
+
+{% block title %}Cadastro{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Cadastre um novo aluno</h1>
+<a href="{% url 'list' %}" >Cancelar</a>
+    <form method="POST" class="form-group">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <ul class="errors">
+                                    {% for error in field.errors %}
+                                        <li class="text-danger">{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </form>
+
+
+{% endblock %}
+
+
+
+

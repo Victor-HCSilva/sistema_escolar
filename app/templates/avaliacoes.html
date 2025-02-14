@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Crie trabalhos e avalicões:{% endblock %}
+
+{% block content %}
+<h1 class="text-center">Crie novas avaliações</h1>
+    <form method="POST" class="form-group">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <ul class="errors">
+                                    {% for error in field.errors %}
+                                        <li class="text-danger">{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary">Cria Avaliação</button>
+                </form>
+
+  
+      {% if avaliacoes %}
+      {% for avaliacao  in avaliacoes %}
+        <p>avalicao</p>
+      {% endfor %}
+        {% else %}
+      <p>Não há provas ou trabalhos criados...</p>
+     
+
+      {% endif %}
+            {% endblock %}
