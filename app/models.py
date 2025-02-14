@@ -13,6 +13,8 @@ class Turma(models.Model):
             ("Turma F", "Turma F"),
         ],
     )
+    def __str__(self):
+        return self.turma
 
 class Ano(models.Model):
     ano = models.CharField(
@@ -29,6 +31,8 @@ class Ano(models.Model):
             ("9° ano", "9° ano"),
         ],
     )
+    def __str__(self):
+        return self.ano
 
 class Aluno(models.Model):
     nome = models.CharField(max_length=250)
