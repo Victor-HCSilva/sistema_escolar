@@ -9,5 +9,6 @@ urlpatterns = [
 	path("delete/<int:id_aluno>", views.delete, name="delete"),#delete
 	path("teste/", views.teste, name="teste"),#delete
     path("avaliacao/", views.avalicao, name="avaliacao"),#delete
-    
+    path("anotacoes/", views.anotacoes, name="abotacoes"),#GET
+
 ]

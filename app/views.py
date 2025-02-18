@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import AlunoForm, AvaliacaoForm
 from .models import Aluno, Avaliacao
-from django.contrib.auth.hashers import make_password  
+from django.contrib.auth.hashers import make_password
 
 def home(request):
 	return render(request, "index.html")
@@ -25,7 +25,7 @@ def cadastro(request):
         "form": form,
     }
     return render(request, "cadastro.html", context)
-	
+
 def list(request):
 	alunos = Aluno.objects.all()
 	q_alunos = len(alunos)
@@ -35,7 +35,7 @@ def list(request):
 	"quantidade":q_alunos,
 	}
 	return render(request, "list.html", context)
-	
+
 def edit(request, id_aluno):
     aluno = get_object_or_404(Aluno, id=id_aluno)
     if request.method == "POST":
@@ -74,7 +74,7 @@ def edit(request, id_aluno):
 
 def delete(request, id_aluno):
 	aluno = get_object_or_404(Aluno, id=id_aluno)
-	
+
 	if request.method == "POST":
 		aluno.delete()
 		return redirect("list")
@@ -107,5 +107,5 @@ def avalicao(request):
 def teste(request):
     return render(request,'teste.html')
 
-
-
+def anotacoes(request):
+    return render(request,"anotacoes.html")
