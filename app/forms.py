@@ -1,9 +1,11 @@
 from django import forms
-from .models import Aluno, Turma, Ano
+from .models import Aluno
 
 class AlunoForm(forms.ModelForm):
     class Meta:
         model = Aluno
+        fields = "__all__"
+"""        model = Aluno
         fields = ['nome', 'ano', 'turma', 'telefone', 'nota1', 'nota2', 'nota3', 'nota4', 'rec', "observacao"]
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-control'}),
@@ -29,6 +31,7 @@ class AlunoForm(forms.ModelForm):
             'nota4': "Nota 4:",
             "observacao": "Observações:",
         }
+"""
 from django import forms
 from django.forms import inlineformset_factory
 from .models import Avaliacao, NotaAvaliacao

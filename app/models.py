@@ -1,7 +1,32 @@
 from django.db import models
 from django.db.models import ForeignKey
+from datetime import date
+from django.utils import timezone
 
-class Turma(models.Model):
+class Aluno(models.Model):
+    matricula = models.IntegerField(default=000000)
+    nome = models.CharField(max_length=250)
+    telefone = models.CharField(max_length=14, default="000000000")
+    rec = models.DecimalField(max_digits=4, decimal_places=2, default=0.0)
+    nota1 = models.DecimalField(max_digits=4, decimal_places=2, default=0.0)
+    nota2 = models.DecimalField(max_digits=4, decimal_places=2, default=0.0)
+    nota3 = models.DecimalField(max_digits=4, decimal_places=2, default=0.0)
+    nota4 = models.DecimalField(max_digits=4, decimal_places=2, default=0.0)
+    observacao = models.TextField(
+        max_length=12000, default="Escreva alguma observação"
+    )
+    ano = models.CharField(max_length=100, choices=[
+            ("1° ano", "1° ano"),
+            ("2° ano", "2° ano"),
+            ("3° ano", "3° ano"),
+            ("4° ano", "4° ano"),
+            ("5° ano", "5° ano"),
+            ("6° ano", "6° ano"),
+            ("7° ano", "7° ano"),
+            ("8° ano", "8° ano"),
+            ("9° ano", "9° ano"),
+        ]
+    )
     turma = models.CharField(
         max_length=250,
         choices=[
@@ -13,41 +38,7 @@ class Turma(models.Model):
             ("Turma F", "Turma F"),
         ],
     )
-    def __str__(self):
-        return self.turma
 
-class Ano(models.Model):
-    ano = models.CharField(
-        max_length=250,
-        choices=[
-            ("1° ano", "1° ano"),
-            ("2° ano", "2° ano"),
-            ("3° ano", "3° ano"),
-            ("4° ano", "4° ano"),
-            ("5° ano", "5° ano"),
-            ("6° ano", "6° ano"),
-            ("7° ano", "7° ano"),
-            ("8° ano", "8° ano"),
-            ("9° ano", "9° ano"),
-        ],
-    )
-    def __str__(self):
-        return self.ano
-
-class Aluno(models.Model):
-    nome = models.CharField(max_length=250)
-    senha = models.CharField(max_length=200, default='passworddefault')
-    telefone = models.CharField(max_length=14, default="000000000")
-    rec = models.DecimalField(max_digits=4, decimal_places=2, default=0.0)
-    nota1 = models.DecimalField(max_digits=4, decimal_places=2, default=0.0)
-    nota2 = models.DecimalField(max_digits=4, decimal_places=2, default=0.0)
-    nota3 = models.DecimalField(max_digits=4, decimal_places=2, default=0.0)
-    nota4 = models.DecimalField(max_digits=4, decimal_places=2, default=0.0)
-    observacao = models.TextField(
-        max_length=12000, default="Escreva alguma observação"
-    )
-    turma = models.ForeignKey(Turma, on_delete=models.CASCADE)
-    ano = models.ForeignKey(Ano, on_delete=models.CASCADE)
     def __str__(self):
         return self.nome
 
@@ -85,3 +76,9 @@ class Professor(models.Model):
 
     def __str__(self):
         return self.nome
+
+class Anotacoes(models.Model):
+    data = models.DateField(default=timezone.now())
+    anotacao = models.CharField(max_length=10000, default="Escreva algo Hoje!")
+    tipo = models.CharField(max_length=200, default="Sem tipo definido")
+    importancia = models.IntegerField(default=1)

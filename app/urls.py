@@ -12,3 +12,4 @@ urlpatterns = [
     path("anotacoes/", views.anotacoes, name="abotacoes"),#GET
 
 ]
+
