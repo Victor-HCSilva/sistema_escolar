@@ -7,12 +7,25 @@
 
 {% block content %}
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div style="background-color: yellow; border-radius: 6px; padding:6px">
 <h1 class="text-center">Sistema Escolar simples</h1>
+
 <p>É possível gerenciar sua classe de forma mais simples e efetiva, não precisa
     de dezenas de de papéis com anotações sobre os alunos, (observações, tarefas individuais)
     nem planilhas enormes com muita informação.Tudo é mais prático. Realize anotações
     de froma rápida e dinâmica.
 </p>
+
+</div>
+{% comment %}
 <input name="b1" type="checkbox" value="1">
 <label for="b1">organização</label>
 <br>
@@ -23,7 +36,6 @@
 <label for="b3">Facilidade</label>
 <br>
 <h2 class="btn btn-primary"><a style="color: white; text-decoration: none;" href="{% url 'cadastro' %}"> Cadastro<a/></h2>
-{% comment %}
   <img id="lapis_index" class="text-center" src={% static 'images/lapis.avif' %} alt="image-index">
 {% endcomment %}
 

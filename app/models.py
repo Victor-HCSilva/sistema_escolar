@@ -77,8 +77,4 @@ class Professor(models.Model):
     def __str__(self):
         return self.nome
 
-class Anotacoes(models.Model):
-    data = models.DateField(default=timezone.now())
-    anotacao = models.CharField(max_length=10000, default="Escreva algo Hoje!")
-    tipo = models.CharField(max_length=200, default="Sem tipo definido")
-    importancia = models.IntegerField(default=1)
+
