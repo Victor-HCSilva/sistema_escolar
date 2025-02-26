@@ -31,32 +31,14 @@ def list(request):
     return l.method_get(request)
 
 def edit(request, id_aluno):
-    aluno = get_object_or_404(Aluno, id=id_aluno)
-    if request.method == "POST":
-        form = AlunoForm(request.POST, instance=aluno) # Passe os dados e a instância
-        if form.is_valid():
-            print("Formulário válido")
-            aluno.save() # Salva o objeto aluno
-            return redirect("list") # Redireciona para a lista de alunos
-        else:
-            print("Formulário inválido")
-            # Imprima os erros do formulário no console (para depuração)
-            print(form.errors)
-            # Lidar com os erros do formulário.  Mostre os erros no template!
-            context = {
-                "form": form,
-                "aluno": aluno,
-            }
-            return render(request, "edit.html", context)
+    e = Manager(path="edit.html",context={})
 
-    else: # Se não for POST (GET request)
-        form = AlunoForm(instance=aluno)
-
-    context = {
-        "form": form,
-        "aluno": aluno,
-    }
-    return render(request, "edit.html", context)
+    return e.method_put(
+            request=request,
+            model_form=AlunoForm,
+            url_to_redirect="list",
+            Model=Aluno,
+            id=id_aluno,)
 
 def delete(request, id_aluno):
 	aluno = get_object_or_404(Aluno, id=id_aluno)
