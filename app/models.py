@@ -4,7 +4,7 @@ from datetime import date
 from django.utils import timezone
 
 class Aluno(models.Model):
-    matricula = models.IntegerField(default=000000)
+    matricula = models.IntegerField(default=000000, unique=True)
     nome = models.CharField(max_length=250)
     telefone = models.CharField(max_length=14, default="000000000")
     rec = models.DecimalField(max_digits=4, decimal_places=2, default=0.0)
@@ -38,9 +38,21 @@ class Aluno(models.Model):
             ("Turma F", "Turma F"),
         ],
     )
-
+    
     def __str__(self):
         return self.nome
+ 
+class Presenca(models.Model):
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    data = models.DateField()
+    presente = models.BooleanField(default=True)  # True = presente, False = ausente
+    observacoes = models.TextField(blank=True, null=True)  # Opcional
+
+    class Meta:
+        unique_together = ('aluno', 'data') # Garante que não haja duplicatas para o mesmo aluno na mesma data
+
+    def __str__(self):
+        return f"{self.aluno.nome} - {self.data} - {'Presente' if self.presente else 'Ausente'}"
 
 
 class Avaliacao(models.Model):

@@ -76,18 +76,15 @@ class Manager:
         self.context["form"] = form
         return render(request, self.path, self.context)
 
-    def method_delete(self, model_form, url_to_redirect, Model, id):
+    def method_delete(self,request, model_form, url_to_redirect, Model, id):
         instance = get_object_or_404(Model, id=id)
 
-        if request == "POST":
-            form = model_form(request.POST, instance=instance)
+        print("Aluno com este nome será excluido:",instance.nome)
 
-            if form.is_valid():
-                form.delete()
-                redirect(url_to_redirect)
-
-        else:
-            form = model_form(instance=instance)
-
-        self.context["form"] = form
+        if request.method == "POST":
+            print("Excluido")
+            instance.delete()
+            return redirect(url_to_redirect)     
+             
         return render(request,self.path, self.context)
+        

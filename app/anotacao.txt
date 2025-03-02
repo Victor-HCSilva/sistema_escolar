@@ -4,5 +4,5 @@
 template), enquanto a atual class Manage viraria algo como "Gerics" pois qualquer crude simples
 poderia ser feito de maneira genérica e concisa com seu uso.
 - Atualizar o arquivo tests.py quando tudo estiver corrigido
-- Criar metodos de inserção de formulario de anotcao e adicionar no template
+- Criar metodos de inserção de formulario de anotacao e adicionar no template
 

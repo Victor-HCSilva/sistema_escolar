@@ -1,5 +1,5 @@
 from django import forms
-from .models import Aluno
+from .models import Aluno,Presenca 
 
 class AlunoForm(forms.ModelForm):
     class Meta:
@@ -62,6 +62,11 @@ class NotaAvaliacaoForm(forms.ModelForm):
             'aluno': "Aluno:",
             'nota': "Nota:",
         }
+
+class PresencaForm(forms.ModelForm):
+    class Meta:
+        model = Presenca
+        fields = "__all__"
 
        
 #Cria um formset para adicionar várias notas de avaliação a uma avaliação.
