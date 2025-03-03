@@ -10,6 +10,6 @@ urlpatterns = [
 	path("teste/", views.teste, name="teste"),#delete
     path("avaliacao/", views.avalicao, name="avaliacao"),#delete
     path("anotacoes/", views.anotacoes, name="abotacoes"),#GET
-    path("registrar_prenca/", views.registrar_presenca, name="registra_presenca")
+    path("registrar_presenca/", views.registrar_presenca, name="registrar_presenca")
 ]
 
