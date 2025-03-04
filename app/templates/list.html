@@ -6,7 +6,7 @@
 
     <h1 class="text-center">Alunos</h1>
     <strong><p>Quant. total de alunos: </strong> {{ quantidade }} </p>
-
+        {% comment  %}
     {% if alunos %}
     <table class="table">
   <thead class="thead-dark">
@@ -44,8 +44,12 @@
   <a class="" href="{% url 'cadastro' %}">Adicione</a>
 {% endif %}
 
+{% endcomment  %}
+{% for i in alunos %}
+    {{ i }} {{ i.presenca }}
+    <a href="{% url 'registrar_presenca' id_aluno=i.id  %}">ver</a>
 
-
+{% endfor  %}
 
 {% endblock %}
 

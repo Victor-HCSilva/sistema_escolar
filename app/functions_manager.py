@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import AlunoForm, AvaliacaoForm
-from .models import Aluno, Avaliacao
+#from .forms import AlunoForm, AvaliacaoForm
+#from .models import Aluno, Avaliacao
 from django.contrib.auth.hashers import make_password
 from django.shortcuts import render, redirect, get_object_or_404
 import logging

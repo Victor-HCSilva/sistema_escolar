@@ -1,35 +1,39 @@
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import AlunoForm, AvaliacaoForm
-from .models import Aluno, Avaliacao
+from .forms import AlunoForm, PresencaForm
+from .models import Aluno
 from django.contrib.auth.hashers import make_password
 from .functions_manager import Manager
-
 
 def home(request):
     h = Manager(path="index.html",context={})
     return h.method_get(request)
 
-
 def cadastro(request):
-    c = Manager(path="cadastro.html", context={})
-    return c.method_post(model_form=AlunoForm,
-                  url_to_redirect="list",
-                request=request)
+    if request.method == "POST":
+        alunoForm = AlunoForm(request.POST)    
+
+        if alunoForm.is_valid() :
+            alunoForm.save()
+            return redirect("list")
+        else:
+            print("Erro no formluario:",alunoForm.errors)
+
+    else:
+        alunoForm = AlunoForm()    
+
+    context = {
+     "alunoForm":AlunoForm,
+     }
+        
+    return render(request, "cadastro.html", context)
 
 def list(request):
     alunos = Aluno.objects.all()
-    q_alunos = len(alunos)
 
-    context = {
-	    "alunos":alunos,
-	    "quantidade":q_alunos,
-	}
+    return render(request, "list.html", {"alunos":alunos})
 
-    l = Manager(path="list.html", context=context)
-
-    return l.method_get(request)
 
 def edit(request, id_aluno):
     e = Manager(path="edit.html",context={})
@@ -50,58 +54,33 @@ def delete(request, id_aluno):
                            Model=Aluno, 
                            id=id_aluno)
 
-def avalicao(request):
-    form  = AvaliacaoForm()
-    avaliacoes = Avaliacao.objects.all()
 
-    if request.method == "POST":
-        form = AvaliacaoForm(request.POST)
-        if form.is_valid():
-            print("Fomulario válido - POST")
-            form.save()
-        else:
-            print("Formulário inválido:\n",form.errors)
-    else:
-        form = AvaliacaoForm()
-    context = {
-        "form":form,
-        "avaliacaoes":avaliacoes,
-        }
-    return render(request, "avaliacoes.html", context)
+from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib import messages
+from .models import Aluno, Presenca  # Importe Presenca
+from .forms import PresencaForm
 
-def registrar_presenca(request, turma_id):
-    turma = get_object_or_404(Turma, pk=turma_id)
-    alunos = turma.aluno_set.all()  # Obtém todos os alunos da turma
+def registrar_presenca(request, id_aluno):
+    aluno = get_object_or_404(Aluno, id=id_aluno)
+    form = PresencaForm() # Não precisa de instance ao inicializar, pois estamos criando um novo objeto
 
     if request.method == 'POST':
-        # Processar múltiplas presenças
-        for aluno in alunos:
-            aluno_id = aluno.id
-            presente = request.POST.get(f'presente_{aluno_id}') == 'on'  # Verifica se a checkbox está marcada
-            data = request.POST.get('data')
-            observacoes = request.POST.get(f'observacoes_{aluno_id}', '') # Pega a observação específica do aluno
+        form = PresencaForm(request.POST)
+        if form.is_valid():
+            presenca = form.save(commit=False)  # Cria o objeto Presenca mas não salva ainda
+            presenca.aluno = aluno  # Define o aluno para a presença
+            presenca.save()  # Salva a presença no banco de dados
 
-            try:
-                presenca, created = Presenca.objects.update_or_create(
-                    aluno_id=aluno_id,
-                    data=data,
-                    defaults={'presente': presente, 'observacoes': observacoes}
-                )
-            except Exception as e:
-                messages.error(request, f"Erro ao salvar presença para {aluno.nome}: {e}")
-                return redirect('registrar_presenca', turma_id=turma_id) # Redireciona de volta com erro
-
-        messages.success(request, "Presenças registradas com sucesso!")
-        return redirect('list') # Redireciona para a listagem
+            data = presenca.data  # Pega a data da presença
+            messages.success(request, f"Presença registrada para {aluno.nome} em {data}")
+            return redirect('list')  # Adapte o redirect para onde você quer ir
+        else:
+            print("Erros:", form.errors)
 
     else:
-        # Exibir o formulário para cada aluno
-        form = PresencaForm()  # Instância vazia do formulário
-
         context = {
-            'turma': turma,
-            'alunos': alunos,
-            'form': form,  # Passa o formulário para o template
+            'form': form,
+            'aluno': aluno,
         }
         return render(request, 'registrar_presenca.html', context)
 

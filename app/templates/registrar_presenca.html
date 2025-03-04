@@ -8,22 +8,13 @@
 
     <form method="post">
         {% csrf_token %}
-        <label for="data">Data:</label>
-        <input type="date" name="data" required>
-        <br><br>
-
-        {% for aluno in alunos %}
-            <div>
-                <label for="presente_{{ aluno.id }}">{{ aluno.nome }}:</label>
-                <input type="checkbox" id="presente_{{ aluno.id }}" name="presente_{{ aluno.id }}">
-                <label for="observacoes_{{ aluno.id }}">Observações:</label>
-                <input type="text" id="observacoes_{{ aluno.id }}" name="observacoes_{{ aluno.id }}">
-            </div>
+        {% for f in form %}
+			{{ f.label }} {{ f }}
         {% endfor %}
 
         <button type="submit">Salvar Presenças</button>
     </form>
 
-    <a href="{% url 'lista_presenca' turma_id=turma.id %}">Ver Lista de Presença</a>
+    <a href="{% url 'list' %}">Lista de alunos</a>
 </body>
 </html>
