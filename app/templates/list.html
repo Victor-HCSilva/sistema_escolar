@@ -5,52 +5,55 @@
 {% block content %}
 
     <h1 class="text-center">Alunos</h1>
-    <strong><p>Quant. total de alunos: </strong> {{ quantidade }} </p>
-        {% comment  %}
-    {% if alunos %}
-    <table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th>Nome</th>
-      <th>Telefone</th>
-      <th>Ano</th>
-      <th>Turma</th>
-      <th>Editar</th>
-      <th>Excluir</th>
-    </tr>
-  </thead>
-  <tbody>
+    <strong><p>Quant. total de alunos: </strong> {{ quantidade }} </p>    <div class="container">
+        <h1>lista de alunos</h1>
 
-    {% for aluno in alunos %}
-    <tr>
-      <td>{{ aluno.nome|title }}</td>
-      {% if aluno.telefone != "000000000" %}
-        <td>{{ aluno.telefone }}</td>
-      {% else %}
-        <td>Não cadastrado</td>
-      {% endif %}
-     <td>{{ aluno.ano }}</td>
-      <td>{{ aluno.turma }}</td>
-
-      
-      <td><a class="btn btn-warning" href="{% url 'edit' id_aluno=aluno.id %}">Editar</a></td>
-      <td><a class="btn btn-danger" href="{% url 'delete' id_aluno=aluno.id %}">Excluir</a></td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-{% else %}
-<h2>Não há cadastros ainda ...</h2>
-  <a class="" href="{% url 'cadastro' %}">Adicione</a>
-{% endif %}
-
-{% endcomment  %}
-{% for i in alunos %}
-    {{ i }} {{ i.presenca }}
-    <a href="{% url 'registrar_presenca' id_aluno=i.id  %}">ver</a>
-
-{% endfor  %}
-
-{% endblock %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>matrícula</th>
+                    <th>nome</th>
+                    <th>telefone</th>
+                    <th>rec</th>
+                    <th>nota 1</th>
+                    <th>nota 2</th>
+                    <th>nota 3</th>
+                    <th>nota 4</th>
+                    <th>turma</th>
+                    <th>ano</th>
+                    <th>editar</th>
+                    <th>presenca</th>
+                    <th>Excluir</th>
+            </thead>
+            <tbody>
+                {% for aluno in alunos %}
+                <tr>
+                    <td>{{ aluno.matricula }}</td>
+                    <td>{{ aluno.nome }}</td>
+                    <td>{{ aluno.telefone }}</td>
+                    <td>{{ aluno.rec }}</td>
+                    <td>{{ aluno.nota1 }}</td>
+                    <td>{{ aluno.nota2 }}</td>
+                    <td>{{ aluno.nota3 }}</td>
+                    <td>{{ aluno.nota4 }}</td>
+                    <td>{{ aluno.turma }}</td>
+                    <td>{{ aluno.ano }}</td>
+                    <td>
+                     <a href="{% url 'edit' id_aluno=aluno.id %}" class="btn btn-warning btn-sm">
+                            editar informações
+                    <td>
+                        <a href="{% url 'registrar_presenca' id_aluno=aluno.id %}" class="btn btn-primary btn-sm">
+                            registrar presença
+                        </a>
+                    </td>
+                     <td>
+                        <a href="{% url 'delete' id_aluno=aluno.id %}" class="btn btn-danger btn-sm">
+                            excluir
+                        </a>
+                    </td>
+                </tr>
+ 
+               {% endfor %}
+      {% endblock %}
 
 

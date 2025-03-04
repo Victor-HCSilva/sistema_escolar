@@ -14,3 +14,7 @@ class PresencaForm(forms.ModelForm):
                 "data": forms.DateInput( attrs={"type":"date",'class': 'datepicker'}),  
         }
 
+
+#for i in Presenca.objects.all():
+
+#sprint(i)

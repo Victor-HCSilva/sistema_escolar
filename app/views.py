@@ -70,8 +70,8 @@ def registrar_presenca(request, id_aluno):
             presenca = form.save(commit=False)  # Cria o objeto Presenca mas não salva ainda
             presenca.aluno = aluno  # Define o aluno para a presença
             presenca.save()  # Salva a presença no banco de dados
-
             data = presenca.data  # Pega a data da presença
+            print(f"Presença salva com data: {presenca.data}")
             messages.success(request, f"Presença registrada para {aluno.nome} em {data}")
             return redirect('list')  # Adapte o redirect para onde você quer ir
         else:

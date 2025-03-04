@@ -49,4 +49,4 @@ class Presenca(models.Model):
     data = models.DateField()
  
     def __str__(self):
-        return f"{self.aluno.nome} em  {self.data}"
+        return f"{self.aluno.nome} em {self.data}"

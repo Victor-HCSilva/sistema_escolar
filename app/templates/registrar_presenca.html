@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Registrar Presença</title>
-</head>
-<body>
+
+
+{% extends "base.html" %}
+{% block title %}Registrar Presença{% endblock %}
+
+{% block content %}
+
     <h1>Registrar Presença para {{ turma.nome }}</h1>
 
     <form method="post">
@@ -16,5 +17,9 @@
     </form>
 
     <a href="{% url 'list' %}">Lista de alunos</a>
-</body>
-</html>
+
+{% endblock %}
+
+
+
+
