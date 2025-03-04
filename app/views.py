@@ -78,7 +78,7 @@ def registrar_presenca(request, id_aluno):
             print("Erros:", form.errors)
 
     else:
-        context = {
+        context =:{
             'form': form,
             'aluno': aluno,
         }
