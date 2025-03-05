@@ -5,8 +5,10 @@
 
 {% block content %}
 
-    <h1>Registrar Presença para {{ turma.nome }}</h1>
+    <h1>Registrar Presença para {{ nome }}</h1>
 
+    <a href="{% url 'list' %}">Voltar</a>
+    <br>
     <form method="post">
         {% csrf_token %}
         {% for f in form %}
@@ -16,7 +18,15 @@
         <button type="submit">Salvar Presenças</button>
     </form>
 
-    <a href="{% url 'list' %}">Lista de alunos</a>
+
+    <hr>
+    
+    <h1>Presenças de {{ nome }}</h1>
+    {% for presenca in presencas %}
+    <p>
+    <strong> Data:</strong> {{ presenca.data|date:"m/d/Y" }} 
+    {% endfor  %}
+    </p>
 
 {% endblock %}
 

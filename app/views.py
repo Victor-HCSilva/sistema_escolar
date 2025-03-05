@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import AlunoForm, PresencaForm
-from .models import Aluno
+from .models import Aluno, Presenca
 from django.contrib.auth.hashers import make_password
 from .functions_manager import Manager
 
@@ -55,12 +55,12 @@ def delete(request, id_aluno):
                            id=id_aluno)
 
 
-from django.shortcuts import get_object_or_404, render, redirect
-from django.contrib import messages
-from .models import Aluno, Presenca  # Importe Presenca
-from .forms import PresencaForm
 
-def registrar_presenca(request, id_aluno):
+def registrar_presenca(request, id_aluno): 
+    aluno = get_object_or_404(Aluno, pk=id_aluno)
+    presencas = Presenca.objects.filter(aluno=aluno)
+    nome_aluno = aluno.nome.title() 
+    
     aluno = get_object_or_404(Aluno, id=id_aluno)
     form = PresencaForm() # Não precisa de instance ao inicializar, pois estamos criando um novo objeto
 
@@ -78,11 +78,15 @@ def registrar_presenca(request, id_aluno):
             print("Erros:", form.errors)
 
     else:
-        context =:{
+        context ={
             'form': form,
             'aluno': aluno,
+            "presencas":presencas,
+            'nome':nome_aluno,
         }
         return render(request, 'registrar_presenca.html', context)
+
+
 
 def teste(request):
     return render(request,'teste.html')
