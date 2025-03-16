@@ -8,6 +8,7 @@ urlpatterns = [
 	path("edit/<int:id_aluno>", views.edit, name="edit"),#post
 	path("delete/<int:id_aluno>", views.delete, name="delete"),#delete
 	path("teste/", views.teste, name="teste"),#delete
+	path("room", views.room, name="room"),#sala ->
     #path("avaliacao/", views.avalicao, name="avaliacao"),#delete
     path("anotacoes/", views.anotacoes, name="abotacoes"),#GET
     path("registrar_presenca/<int:id_aluno>", views.registrar_presenca, name="registrar_presenca")

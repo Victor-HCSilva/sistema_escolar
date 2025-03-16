@@ -50,3 +50,14 @@ class Presenca(models.Model):
  
     def __str__(self):
         return f"{self.aluno.nome} em {self.data}"
+
+
+class Aviso(models.Model):
+    titulo = models.CharField(max_length=100) 
+    aviso = models.CharField(max_length=50000)
+    data = models.DateField(default = timezone.now())
+ 
+    def __str__(self):
+        return f"{self.aluno.nome} em {self.data}"
+
+
