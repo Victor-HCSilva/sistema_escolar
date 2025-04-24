@@ -1,9 +1,14 @@
 from django import forms
-from .models import Aluno, Presenca, Aviso
+from .models import Aluno, Presenca, Aviso, Professor
 
 class AlunoForm(forms.ModelForm):
     class Meta:
         model = Aluno
+        fields = "__all__"                
+
+class ProfessorForm(forms.ModelForm):
+    class Meta:
+        model = Professor
         fields = "__all__"                
         
 class PresencaForm(forms.ModelForm):
@@ -22,7 +27,6 @@ class AvisoForm(forms.ModelForm):
             "titulo": forms.TextInput(attrs={'class': 'form-control'}), # Adicionado 'forms.' e atributos
             "aviso": forms.Textarea(attrs={'class': 'form-control'}), # Adicionado 'forms.' e atributos
         }
-
 
 #for i in Presenca.objects.all():
 

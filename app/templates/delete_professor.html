@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Deletar{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center">Deletar professor</h1>
+<br>
+<h2 > Deseja <span class="text-danger">excluir</span>  o(a) professor(a): {{ professor.nome }}?</h2>
+	<form method="POST">{% csrf_token %}
+		<button class="btn btn-danger" type="submite"> Excluir</button>		
+	</form>
+	<br>
+	<a class="btn btn-secondary" href="{% url 'list_professor' %}">Cancelar</a>
+{% endblock %}
+
+

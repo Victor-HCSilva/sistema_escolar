@@ -1,15 +1,16 @@
 
 
+
 {% extends "base.html" %}
 
-{% block title %}Cadastro{% endblock %}
+{% block title %}Cadastro professor{% endblock %}
 
 {% block content %}
-<h1 class="text-center">Cadastre um novo aluno</h1>
+<h1 class="text-center">Cadastre um novo professor</h1>
 <a href="{% url 'list' %}" >Cancelar</a>
     <form method="POST" class="form-group">
         {% csrf_token %}
-        {% for field in alunoForm  %}
+        {% for field in form  %}
         {{ field.label }} {{ field  }}
         <br>
         <br>

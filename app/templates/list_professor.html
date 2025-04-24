@@ -1,0 +1,16 @@
+
+{% extends "base.html" %}
+
+{% block title %} Professores {% endblock %}
+
+{% block content %}
+
+        {% for i in professor  %}
+            {{ i.nome  }}
+            <a href="{% url 'edit_professor' id_professor=i.id    %}">Editar</a>
+            <a href="{% url 'delete_professor' id_professor=i.id    %}">Deletar</a>
+        {% endfor  %}
+
+{% endblock %}
+
+
