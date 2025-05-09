@@ -71,24 +71,6 @@ def registrar_presenca(request, id_aluno):
         }
         return render(request, 'registrar_presenca.html', context)
 
-def room(request):
-    avisos = Aviso.objects.all()
-    if request.method == "POST":
-        form = AvisoForm(request.POST)
-        if form.is_valid():
-            print("Form salvo")
-            form.save()
-            return redirect("index")
-        else:
-            print("Erro no formulario:", form.errors)
-    else:
-        form = AvisoForm()
-    context = {
-        "form": form,
-        "avisos": avisos,
-    }
-    return render(request, "room.html", context)
-
 def teste(request):
     return render(request,'teste.html')
 

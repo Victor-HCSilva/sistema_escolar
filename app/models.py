@@ -75,12 +75,3 @@ class Professor(models.Model):
         ("9° ano", "9° ano"),
         ]
        )
-
-class Aviso(models.Model):
-    #professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
-    titulo = models.CharField(max_length=100)
-    aviso = models.CharField(max_length=50000)
-    data = models.DateField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Aviso: {self.titulo} | Data de criação: {self.data}"
