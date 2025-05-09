@@ -12,14 +12,14 @@ def home(request):
 
 def cadastro(request):
     if request.method == "POST":
-        alunoForm = AlunoForm(request.POST)    
+        alunoForm = AlunoForm(request.POST)
         if alunoForm.is_valid() :
             alunoForm.save()
             return redirect("list")
         else:
             print("Erro no formluario:",alunoForm.errors)
     else:
-        alunoForm = AlunoForm()    
+        alunoForm = AlunoForm()
     context = {
         "alunoForm":AlunoForm,
      }
@@ -43,13 +43,13 @@ def delete(request, id_aluno):
     return d.method_delete(request=request,
                            model_form=AlunoForm,
                            url_to_redirect="list",
-                           Model=Aluno, 
+                           Model=Aluno,
                            id=id_aluno)
 
-def registrar_presenca(request, id_aluno): 
+def registrar_presenca(request, id_aluno):
     aluno = get_object_or_404(Aluno, pk=id_aluno)
     presencas = Presenca.objects.filter(aluno=aluno)
-    nome_aluno = aluno.nome.title() 
+    nome_aluno = aluno.nome.title()
     form = PresencaForm() # Não precisa de instance ao inicializar, pois estamos criando um novo objeto
     if request.method == 'POST':
         form = PresencaForm(request.POST)
@@ -72,17 +72,22 @@ def registrar_presenca(request, id_aluno):
         return render(request, 'registrar_presenca.html', context)
 
 def room(request):
-    if request.method == "GET":
-        form = AvisoForm()
-        avisos = Aviso.objects.all()
-        return render(request, "room.html", {"form":form, "avisos":avisos})
-    elif request.method == "POST":
+    avisos = Aviso.objects.all()
+    if request.method == "POST":
         form = AvisoForm(request.POST)
         if form.is_valid():
+            print("Form salvo")
             form.save()
-            return redirect("room")
+            return redirect("index")
         else:
-            print("Erros nno formulario:",form.errors)
+            print("Erro no formulario:", form.errors)
+    else:
+        form = AvisoForm()
+    context = {
+        "form": form,
+        "avisos": avisos,
+    }
+    return render(request, "room.html", context)
 
 def teste(request):
     return render(request,'teste.html')
@@ -93,14 +98,14 @@ def anotacoes(request):
 
 def cadastro_professor(request):
     if request.method == "POST":
-        form = ProfessorForm(request.POST)    
+        form = ProfessorForm(request.POST)
         if form.is_valid() :
             form.save()
             return redirect("list_professor")
         else:
             print("Erro no formluario:",form.errors)
     else:
-        form = ProfessorForm(request.POST)    
+        form = ProfessorForm(request.POST)
     context = {
         "form":form,
      }
@@ -125,7 +130,5 @@ def delete_professor(request, id_professor):
     return d.method_delete(request=request,
                            model_form=ProfessorForm,
                            url_to_redirect="list_professor",
-                           Model=Professor, 
+                           Model=Professor,
                            id=id_professor)
-
-
