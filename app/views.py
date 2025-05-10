@@ -1,8 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import AlunoForm, PresencaForm, AvisoForm, ProfessorForm
-from .models import Aluno, Presenca, Aviso, Professor
+from .forms import AlunoForm, PresencaForm, ProfessorForm
+from .models import Aluno, Presenca, Professor
 from django.contrib.auth.hashers import make_password
 from .functions_manager import Manager
 

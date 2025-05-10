@@ -5,12 +5,13 @@
 
 {% block content %}
 
-        {% for i in professor  %}
-            {{ i.nome  }}
-            <a href="{% url 'edit_professor' id_professor=i.id    %}">Editar</a>
-            <a href="{% url 'delete_professor' id_professor=i.id    %}">Deletar</a>
-        {% endfor  %}
-
+{% if professor  %}
+    {% for i in professor  %}
+        {{ i.nome  }}
+        <a href="{% url 'edit_professor' id_professor=i.id    %}">Editar</a>
+        <a href="{% url 'delete_professor' id_professor=i.id    %}">Deletar</a>
+    {% endfor  %}
+{% else %}
+<p>Sem professores cadastrados ainda</p>
+{% endif  %}
 {% endblock %}
-
-

@@ -19,3 +19,21 @@ def room(request):
         "avisos": avisos,
     }
     return render(request, "room.html", context)
+
+def turmas(request):
+    if request.method == "POST":
+        form = SalaForm(request.POST)
+        if form.is_valid():
+            print("Form salvo")
+            form.save()
+            return redirect("index")
+        else:
+            pritn("Erros:", form.errors)
+    else:
+        form = SalaForm()
+        turmas = Sala.objects.all()
+    context = {
+        "form":form,
+        "turmas":turmas,
+    }
+    return render(request, "turmas.html", context)
