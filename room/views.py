@@ -1,5 +1,5 @@
-from .models import Sala, Aviso
-from .forms import SalaForm, AvisoForm
+from .models import Turma, Aviso
+from .forms import TurmaForm, AvisoForm
 from django.shortcuts import render, get_object_or_404, redirect
 
 def room(request):
@@ -22,7 +22,7 @@ def room(request):
 
 def turmas(request):
     if request.method == "POST":
-        form = SalaForm(request.POST)
+        form = TurmaForm(request.POST)
         if form.is_valid():
             print("Form salvo")
             form.save()
@@ -30,8 +30,8 @@ def turmas(request):
         else:
             pritn("Erros:", form.errors)
     else:
-        form = SalaForm()
-        turmas = Sala.objects.all()
+        form = TurmaForm()
+        turmas = Turma.objects.all()
     context = {
         "form":form,
         "turmas":turmas,

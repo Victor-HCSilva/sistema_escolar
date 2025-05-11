@@ -1,8 +1,8 @@
 from django.db import models
-from app.models import Aluno
+from app import models as md
 
-class Sala(models.Model):
-    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+class Turma(models.Model):
+    aluno = models.ForeignKey(md.Aluno, on_delete=models.CASCADE)
     codigo = models.CharField(max_length=8)
     numero = models.IntegerField()
     ano = models.CharField(max_length=100, choices=[

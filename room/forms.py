@@ -1,9 +1,9 @@
 from django import forms
-from .models import Sala, Aviso
+from .models import Turma, Aviso
 
-class SalaForm(forms.ModelForm):
+class TurmaForm(forms.ModelForm):
     class Meta:
-        model = Sala
+        model = Turma
         fields = "__all__"
 
 class AvisoForm(forms.ModelForm):
