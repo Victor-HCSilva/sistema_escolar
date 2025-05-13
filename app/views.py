@@ -6,6 +6,7 @@ from .models import Aluno, Presenca, Professor
 from django.contrib.auth.hashers import make_password
 from .functions_manager import Manager
 
+#teste
 def home(request):
     h = Manager(path="index.html",context={})
     return h.method_get(request)
